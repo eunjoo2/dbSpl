@@ -32,5 +32,11 @@ FROM USER_TAB_COLUMNS;
 SELECT *
 FROM lprod;
 
+SELECT buyer_id,buyer_name
+FROM BUYER;
+
 SELECT *
-FROM 
+FROM CART;
+
+SELECT mem_id, mem_pass, mem_name
+FROM MEMBER;
