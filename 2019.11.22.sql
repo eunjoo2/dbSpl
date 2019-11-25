@@ -232,6 +232,6 @@ FROM
     WHERE  BETWEEN 11 AND 14;
 
 
-SELECT ROWNUM rn, empno, ename
+(SELECT ROWNUM rn, empno, ename
     FROM emp
-    ORDER BY ename;
+    ORDER BY ename);
