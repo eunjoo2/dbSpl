@@ -96,3 +96,11 @@ SELECT *
 FROM emp
 WHERE job = 'SALESMAN' 
 AND HIREDATE >= TO_DATE('1981.06.01', 'YYYY.MM.DD');
+
+
+------실습 
+
+SELECT *
+FROM emp
+WHERE deptno LIKE 
+AND hirtdate > TO_DATE('19810601', 'YYYYMMDD');

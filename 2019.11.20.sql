@@ -1,4 +1,4 @@
---특정 테이블의 컬럼 조회
+    --특정 테이블의 컬럼 조회
 --1. DESC 테이블명
 --2. SELECT * FROM user rab_colummns;
 
