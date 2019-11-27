@@ -171,11 +171,66 @@ SELECT empno, ename, job, sal,
     DECODE(JOB, 'SALESMAN', sal * 1.05,
                 'MANAGER', sal * 1.10,
                 'PRESIDNT', sal * 1.20,
-                
+                ELSE 
 FROM emp;
 
+SEOECT
 
---실습
-SELECT 
+--실습 1 emp 테이블을 이용하여 deptno에 따라 부서명을 변경해서 다음과 같이 조회되는 쿼리를 작성하세요.
+
+SELECT EMPNO ,ENAME,
+        CASE
+            WHEN deptno = 10 THEN 'ACCOUNTING'
+            WHEN deptno = 20 THEN 'RESEARCH'
+            WHEN deptno = 30 THEN 'SALES'
+            WHEN deptno = 40 THEN 'OPERATIONS'
+            ELSE 'DDIT'
+        END dname
     
 FROM emp;
+
+SELECT 
+    DECODE(deptno,  10,'ACCOUNTING'
+                    20,'RESEARCH'
+                    30,'SALES'
+                    40,'OPERATIONS'
+FROM emp;
+----실습 2 emp 테이블을 이용하여 hiredate 따라 올해 건강보험 검진 대상자인지 조회하는 쿼리를 작성하세요.
+--(생년을 기준으로 하나 여기서는 hiredate를 기준으로 한다.)
+--1. TO_CHAR(SYSDATE, 'YYYY')
+--> 올해년도 구분( 0:짝수년, 1:홀수년)
+
+
+SELECT empno, ename, hiredate,
+        CASE
+            WHEN     MOD(TO_NUMBER(TO_CHAR(hiredate, 'yy')), 2) = 1
+            
+            THEN '건강검진 대상자'        
+            ELSE '건강검진 비대상자'
+        END CONTACT_TO_DOCTOR
+FROM emp;
+--내년도(2020) 건강검진 대상자를 조회하는 쿼리를 작성해보세요.
+
+SELECT empno, ename, hiredate,
+        CASE
+            WHEN    MOD(TO_NUMBER(TO_CHAR(hiredate,'yy')), 2) =
+                    MOD(TO_CHAR(TO_DATE('2020','YYYY'),'YY'),2) --MOD(2020,2)/(SYSDATE,'YYYY')+1
+            THEN '건겅검진 대상자'
+            ELSE '건간검진 비대상자'
+        END contact_to_doctor
+FROM emp;
+
+--실습 3 emp 테이블을 이용하여 reg_dt에 따라 올해 건강보험 검진 대상자인지 조회하는 쿼리를 작성하세요.
+--(생년을 기준으로 하나 여기서는 reg_dt를 기준으로 한다.)
+
+SELECT userid, usernm, alias, reg_dt,
+    CASE
+        WHEN reg_dt IN NULL THEN '건강검진 비대상자'
+        ELSE '건강검진 대상자'
+        
+    END CONTACTTODOCTOR
+    
+FROM users;
+
+
+
