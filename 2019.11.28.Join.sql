@@ -167,7 +167,7 @@ SELECT empno, ename, sal,grade
 FROM emp, salgrade
 WHERE emp.sal BETWEEN salgrade.losal AND salgrade.hisal; 
 
----실습(join0)
+---실습(join0_0)
 SELECT *
 FROM emp;
 
@@ -179,7 +179,7 @@ FROM emp JOIN dept
 ON dept.deptno = emp.deptno
 ORDER BY deptno;
 
------실습join(1.1)부서번호(10,30)인 사람만 조회
+-----실습join(0.1)부서번호(10,30)인 사람만 조회
 
 SELECT c. *
 FROM
@@ -189,7 +189,7 @@ FROM
     ORDER BY deptno)c
 WHERE c.deptno = 10 OR c.deptno = 30;
 
---실습join(1.2).급여가2500 초과
+--실습join(0.2).급여가2500 초과
 
 SELECT c. *
 FROM
@@ -199,7 +199,7 @@ ON dept.deptno = emp.deptno)c
 WHERE c.sal > 2500 
 ORDER BY deptno;
 
---실습join(1.3)급여가 2300 초과 사번이 7600
+--실습join(0.3)급여가 2300 초과 사번이 7600
 
 SELECT c. *
 FROM
