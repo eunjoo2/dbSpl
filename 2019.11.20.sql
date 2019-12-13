@@ -30,7 +30,7 @@ SELECT userid, usernm, reg_dt, reg_dt+5 AS after5day
 FROM users;
 
 -- 숫자 상수. 문자열 상수 ( oracle : '' , java : '', "") 
--- table에 없는 값을 입으로 컬럼으로 생성
+-- table에 없는 값을 일부로 컬럼으로 생성
 -- 숫자에 대한 연산 ( +, -, /, *)
 -- 문자에 대한 연산 ( + 가 존재하지 않음, = || )
 SELECT 10-5*2, 'DB SQL 수업',

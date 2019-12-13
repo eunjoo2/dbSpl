@@ -99,6 +99,8 @@ UNION
 SELECT empno, ename
 FROM emp
 WHERE job = 'SALESMAN';
+
+
 --서로 다른 집합의 합집합
 --합집합 연산시 중복제거를 하지 않는다.
 --위아래 결과를 붙여 주기만 한다.
@@ -111,6 +113,7 @@ UNION ALL
 SELECT empno,ename
 FROM emp
 WHERE job ='CLERK';
+
 --집합연산시 집합셋의 컬럼이 동일해야한다.
 --컬럽의 개수가 다를 경우 임의의 값을 넣는 방식으로 개수를 맞춰준다
 SELECT empno, ename, ''
@@ -122,6 +125,7 @@ UNION ALL
 SELECT empno,ename,job
 FROM emp
 WHERE job ='SALESMAN';
+
 
 --INTERSECT : 교집합
 --두집한간 공통적인 데이터만 조회

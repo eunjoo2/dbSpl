@@ -87,17 +87,74 @@ FROM emp e RIGHT OUTER JOIN emp m
 --OUTER JOIN 1
 SELECT BUYPROD.BUY_DATE, BUYPROD.BUY_PROD
 FROM PROD,BUYPROD;
+  
     
-    SELECT a.BUY_DATE,a.BUY_PROD,b.prod_id,b.prod_name,a.BUY_QTY
-    FROM buyprod a, prod b
-    WHERE a.BUY_DATE(+) = TO_DATE ('2005_01_25')
-    AND a.BUY_PROD(+) = b.PROD_ID;
+SELECT a.BUY_DATE,a.BUY_PROD,b.prod_id,b.prod_name,a.BUY_QTY
+FROM buyprod a, prod b
+WHERE a.BUY_DATE(+) = TO_DATE ('2005_01_25')
+AND a.BUY_PROD(+) = b.PROD_ID;
+ 
     
 --OUTER JOIN 2
 SELECT BUYPROD.BUY_DATE, BUYPROD.BUY_PROD
 FROM PROD,BUYPROD;
     
-    SELECT a.BUY_DATE,a.BUY_PROD,b.prod_id,b.prod_name,a.BUY_QTY
+    SELECT TO_DATE(:yyyymmdd,'YYYYMMDD') BUYDATE ,a.BUY_PROD,b.prod_id,b.prod_name,a.BUY_QTY
     FROM buyprod a, prod b
     WHERE a.BUY_DATE(+) = TO_DATE ('2005_01_25')
     AND a.BUY_PROD(+) = b.PROD_ID;
+
+
+
+--OUTER JOIN 3
+
+ SELECT NVL(TO_CHAR(a.BUY_DATE,'yy/mm/dd'), '05/01/25')BUY_DATE,a.BUY_PROD,b.prod_id,b.prod_name,NVL(a.BUY_QTY, '0')BUY_QTY
+    FROM buyprod a, prod b
+    WHERE a.BUY_DATE(+)= TO_DATE ('2005_01_25')
+    AND a.BUY_PROD(+) = b.PROD_ID;
+    
+SELECT
+    *
+FROM BUYPROD,PROD
+WHERE BUY_DATE = TO_DATE ('2005_01_25');    
+--OUTER JOIN 4
+SELECT PRODUCT.PID, product.PNM,
+NVL(cycle.CID,1)CID,
+NVL(cycle.DAY,0)DAY,
+NVL(cycle.CNT,0)CNT
+FROM cycle,product
+WHERE cycle.PID(+) = product.PID
+AND cycle.CID(+) IN 1;
+
+SELECT PRODUCT.PID, product.PNM,
+NVL(cycle.CID,1)CID,
+NVL(cycle.DAY,0)DAY,
+:cid
+FROM cycle,product
+WHERE cycle.PID(+) = product.PID
+AND cycle.CID(+) = :cnt ;
+
+--OUTER JOIN 5
+SELECT PRODUCT.PID, product.PNM, NVL(cycle.CID, '1')CID, CUSTOMER.CNM,
+        NVL(cycle.DAY,0)DAY, NVL(cycle.CNT,0)CNT
+FROM cycle,product,CUSTOMER
+WHERE cycle.PID(+) = product.PID
+AND cycle.CID(+) IN 1
+AND CUSTOMER.CNM IN'brown'
+ORDER BY product.PID DESC ,DAY DESC;
+
+--실습5
+SELECT product.pid, pnm, NVL(cycle.cid,'1')cycle, NVL(cnm, 'brown') cnm, 
+        NVL(day,0) day, NVL(cnt,0) cnt
+FROM cycle, product, customer
+WHERE product.pid = cycle.pid (+)
+AND cycle.cid = customer.cid (+)
+AND cycle.cid (+)= 1
+ORDER BY pid DESC, DAY DESC;
+
+SELECT *
+FROM product;
+
+--CROSS 실습
+SELECT *
+FROM CUSTOMER CROSS JOIN PRODUCT;

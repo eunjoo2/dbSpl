@@ -221,15 +221,15 @@ WHERE rn BETWEEN 11 AND 20;
 -- emp 테이블에서 ename 으로 정렬한 결과에 11번째 행과 14번째 행만 조회하는 쿼리를 작성해 보세요
 --(empno, ename 컬럼과 행번호만 조회)
 
-SELECT *
+SELECT rn,empno, ename
 FROM
-    ( SELECT a. empno, ename
-        FROM
-            (SELECT ROWNUM rn, empno, ename
-             FROM emp
-            ORDER BY ename) a )
+        (SELECT ROWNUM rn, a.*
+         FROM
+        (SELECT  empno, ename
+         FROM emp
+         ORDER BY ename) a )
             
-    WHERE  BETWEEN 11 AND 14;
+WHERE rn BETWEEN 11 AND 14;
 
 
 (SELECT ROWNUM rn, empno, ename
