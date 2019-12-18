@@ -188,3 +188,4 @@ UNION ALL
 SELECT *
 FROM emp_Test2
 WHERE empno > 8000;
+
