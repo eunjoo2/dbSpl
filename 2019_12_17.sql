@@ -108,6 +108,9 @@ FROM
         GROUP BY TO_CHAR(DT,'mm')
         );
 
+
+
+--계층쿼리
 SELECT dept_h.*,LEVER
 FROM dept_h
 START WITH deptcd = 'dept0' --시작점은 deptcd = 'dept0' --> xx회사 (최상위 조직)
