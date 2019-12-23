@@ -110,27 +110,31 @@ SELECT empno,ename,hiredate,job,sal,
 FROM emp;
 
 --window함수 실습 no_ana3
-SELECT emp.empno,emp.ename,a.sum_sal, b.c_sum
-FROM emp,
 
-    (SELECT empno,SUM(sal)sum_sal
-    FROM emp
-    GROUP BY empno)a,
-    
+SELECT a.empno, a.ename, a.sal, SUM(b.sal) 
+FROM
+    (SELECT aa.*, ROWNUM rn
+    FROM
+        (SELECT empno, ename, sal
+        FROM emp
+        ORDER BY sal)aa) a, 
+        
+    (SELECT bb.*, ROWNUM rn
+    FROM
+        (SELECT empno, ename, sal
+        FROM emp
+        ORDER BY sal)bb) b
+WHERE a.rn >= b.rn
+GROUP BY a.empno, a.ename, a.sal
+ORDER BY sal;
+
+
+
+SELECT *
+    FROM emp  ,
     (SELECT ROWNUM c_sum
     FROM dual
-    CONNECT BY level <= (SELECT sal FROM emp))b
-    
-WHERE emp.empno = a.empno
-ORDER BY emp.sal;
-
-
-
-SELECT a.*,SUM(sal)sum_sal
-    FROM emp ,
-    (SELECT ROWNUM c_sum
-    FROM dual
-    CONNECT BY level <= (SELECT COUNT(*) FROM emp)a,
+    CONNECT BY level <= (SELECT COUNT(*) FROM emp))a
     
     
     GROUP BY empno

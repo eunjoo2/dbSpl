@@ -83,7 +83,7 @@ END;
 exec printemp(7369);
 
 ;
---procedure 생성 실습(pro_1)
+--procedure 생성 실습(pro_2)
 CREATE OR REPLACE PROCEDURE rehistdept_test
     --파라미터명 IN/OUT 타입
     --p_파라미터 이름
@@ -105,4 +105,32 @@ BEGIN
 END;
 /
 ;
-exec rehistdept_test(99, 'ddit''daejeon');
+exec rehistdept_test(99, 'ddit','daejeon');
+
+--procedure 생성 실습(pro_3)
+CREATE OR REPLACE PROCEDURE UPDATEdept_test
+    --파라미터명 IN/OUT 타입
+    --p_파라미터 이름
+(p_deptno IN dept_test.deptno%TYPE, 
+p_dname IN dept_test.dname%TYPE,
+p_loc IN dept_test.loc%TYPE)      
+IS
+--선언부(옵션)
+    deptno dept_test.deptno%TYPE;
+    dname dept_test.dname%TYPE;
+    loc dept_test.loc%TYPE;
+--실행부
+BEGIN
+  UPDATE dept_test 
+  SET dname = 'ddit_m',loc = 'daejeon'
+  WHERE deptno = 99;
+  
+  DBMS_OUTPUT.PUT_LINE(deptno || ' ' ||dname|| ' '||loc);
+--예외처리부(옵션)
+END;
+/
+;
+exec UPDATEdept_test(99, 'ddit_m','daejeon');
+
+SELECT *
+FROM dept_test;
